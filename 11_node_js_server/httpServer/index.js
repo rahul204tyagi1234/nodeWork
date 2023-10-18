@@ -1,15 +1,26 @@
-// const http = reruire("http");
+// const http = require("http");
 // const server = http.createServer((req,res)=>{
-//     res.end("Hello from the other sides");
+//     console.log(req.url);
+//     res.end("Hello from the other sides rahul ji");
 // });
-// server.listen(3000,"localhost"()=>{
-//     console.log("listing to the port on 3000");
+// server.listen(8000,"localhost",()=>{
+//     console.log("listing to the port on 8000");
+// });
 
-// })
-var http = require('http');
-
-//create a server object:
-http.createServer(function (req, res) {
-  res.write('Hello World!'); //write a response to the client
-  res.end(); //end the response
-}).listen(8080); 
+const http = require("http");
+const server = http.createServer((req,res)=>{
+    // console.log(req.url);
+    if(req.url == "/"){
+        res.end("<h1> Hello from the home side </h1>");
+    }else if(req.url == "/about"){
+        res.end("Hello from the about side");
+    }
+    else{
+        // res.writeHead(404);
+        res.end("<h1>404 error page, page is not found </h1>")
+    }
+    res.end("Hello from the other sides rahul ji");
+});
+server.listen(8000,"localhost",()=>{
+    console.log("listing to the port on 8000");
+});
