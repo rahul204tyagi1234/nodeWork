@@ -8,7 +8,7 @@
 // });
 
 const http = require("http");
-const server = http.createServer((req,res)=>{
+var server = http.createServer((req,res)=>{
     // console.log(req.url);
     if(req.url == "/"){
         res.end("<h1> Hello from the home side </h1>");

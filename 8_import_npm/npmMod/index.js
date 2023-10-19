@@ -1,6 +1,3 @@
-// const chalk = require("chalk");
-// console.log("Hwllo");
-// console.log(chalk.blue("Hello world"));
 
 
 // Importing module 
