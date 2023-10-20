@@ -1,9 +1,9 @@
 const http = require("http");
 const user = require('./userApi/data.json')
 const fs =require("fs");
-const path = require('path');
-const dataPath = path.join(__dirname, "useApi/data.json");
-console.log(dataPath);
+// const path = require('path');
+// const dataPath = path.join(__dirname, "useApi/data.json");
+// console.log(dataPath);
 var server = http.createServer((req,res)=>{
     // console.log(req.url);
     if(req.url == "/"){
@@ -17,9 +17,10 @@ var server = http.createServer((req,res)=>{
         res.write("<h1> Hello from the contactUs side </h1>");
         res.end();    
     }else if(req.url == "/userapi"){
-        fs.readFile(`${dataPath}`,data=>{
+        fs.readFile(`${__dirname} /userApi`,
+        data=>{
             const users = JSON.parse(data);
-            console.log(users);
+            // console.log(users);
             // res.end(data); 
         })
         res.write("<h1> Hello from the userApi side </h1>");
