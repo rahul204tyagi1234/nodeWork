@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <link rel="stylesheet" href="style.css">
+    <title>Weather</title>
+</head>
+<body>
+    <div class="box">
+        <div class="wave -one"></div>
+        <div class="wave -two"></div>
+        <div class="wave -three"></div>
+        <div id="weathercon">
+            <i class="fas fa-sun" style="color: #eccc68;"></i>
+        </div>
+        <div class="info">
+            <h2 class="location"><i class="fas fa-street-view"></i>Jalalabad,In</h2>
+            <p id="date">WED | OCT 24 | 12:19 PM</p>
+            <h1 class="temp"> 26.49 C</h1>
+            <h3 class="tempmin_max">Min 26.49 C |Max 26.49 C</h3>
+        </div>
+    </div>
+
+    <script>
+        const curDate =document.getAnimations("date");
+        let weathercon =document.getElementById("weathercon");
+        const tempStatus = "Clouds";
+        const getCurrentDay =()=>{
+            var weekDay = new Array(7);
+            weekDay[0] = "Sunday";
+            weekDay[1] = "Monday";
+            weekDay[2] = "Tuesday";
+            weekDay[3] = "Wednesday";
+            weekDay[4] = "Thursday";
+            weekDay[5] = "Friday";
+            weekDay[6] = "Saturday";
+            let currentTime = new Date();
+            console.log(weekDay[currentTime.getDay()]);
+        };
+
+        const getCurrentTime =()=>{
+            var months = [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "June",
+                "July",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec",
+
+            ];
+            var now = new Date();
+            var month = months[now.getMonth()] ;
+            var date = now.getDate();
+             
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let perios ="AM";
+            if(hours > 11){
+                perios="PM";
+                if(hours > 12) hours -= 12 
+            }
+            if(minutes >10){
+                minutes = "0" + minutes;
+            }
+
+            console.log(month + "/" + date)
+        };
+        getCurrentTime();
+        getCurrentDay();
+    </script>
+</body>
+</html>
