@@ -23,6 +23,7 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
+  
   res.send("Hello from the home side");
 });
 app.get("/about", (req, res) => {
@@ -42,12 +43,12 @@ app.get("/temp", (req, res) => {
     },
      {
       id: 2,
-      Name: "Anchal Kumari",
-      address: "Alde Mau",
+      Name: "Ravi Kumar",
+      address: "Jakhaniya",
     },
     {
         id: 3,
-        Name: "Asthas Maurya",
+        Name: "Anish Maurya",
         address: "Rehati malipur",
       },
   ]);

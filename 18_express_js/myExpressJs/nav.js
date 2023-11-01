@@ -42,12 +42,12 @@ app.get("/temp", (req, res) => {
     },
      {
       id: 2,
-      Name: "Anchal Kumari",
-      address: "Alde Mau",
+      Name: "Ravi Kumar",
+      address: "Jakhaniya",
     },
     {
         id: 3,
-        Name: "Asthas Maurya",
+        Name: "Anish Maurya",
         address: "Rehati malipur",
       },
   ]);
