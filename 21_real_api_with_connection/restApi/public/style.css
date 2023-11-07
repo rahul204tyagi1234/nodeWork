@@ -1,0 +1,21 @@
+h1{
+    text-align: center;
+    color: rgb(6, 238, 238);
+}
+.card{
+    margin: 25px;
+    width: 30rem;
+    text-align: center;
+    
+    
+}
+.card-header{
+    text-align: center;
+    background-color: rgb(212, 242, 242);
+    text-size-adjust: 23px;
+}
+input{
+    padding: 5px;
+    margin: 10px;
+    
+}
