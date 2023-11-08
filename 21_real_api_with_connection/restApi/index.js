@@ -44,11 +44,12 @@ app.post("/addData", async function (req, res) {
     const database = client.db("user-api");
     const collection = database.collection("userData");
     const data = {
-      name: req.query.name,
-      age: parseInt(req.query.age),
-      gender: req.query.gender,
-      salary: parseInt(req.query.salary),
+      name: req.body.name,
+      age: parseInt(req.body.age),
+      gender: req.body.gender,
+      salary: parseInt(req.body.salary),
     };
+    console.log("your data",data)
     const result = await collection.insertOne(data);
     console.log("your data is inserted done !", result);
     res.json({ result: result });
