@@ -11,9 +11,12 @@ async function connectToDb() {
 }
 connectToDb();
 
+// app.use(bodyParser.json())
 const express = require("express");
 const app = express();
-app.use(express.json());
+const bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Get method
 // to tell express that the public folder contain all the assests
@@ -29,7 +32,9 @@ app.get("/", async function (req, res) {
     const database = client.db("user-api");
     const collection = database.collection("userData");
     const data = await collection.find({}).toArray();
-    res.json(data);
+    res.render("app",{
+      userData:data
+    });
     console.log("your data is created");
   } catch (err) {
     console.log("can not get data", err);
@@ -49,10 +54,14 @@ app.post("/addData", async function (req, res) {
       gender: req.body.gender,
       salary: parseInt(req.body.salary),
     };
+    // console.log("your age",age)name
     console.log("your data",data)
+    
     const result = await collection.insertOne(data);
     console.log("your data is inserted done !", result);
-    res.json({ result: result });
+    
+    
+    // res.json({ result: result });
   } catch (err) {
     console.error("your data is not inserting", err);
   }

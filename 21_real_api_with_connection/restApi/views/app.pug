@@ -6,14 +6,14 @@ html
   body 
 
     h1 Welcome to home page
-    form(action="/addData" method="POST") 
+    form(action="addData" method="POST") 
       .card 
         .card-header Login
         label(for="name") Name 
-        input(type="text" id="name" value="" name="name")
+        input(type="text" value="" name="name")
 
         label(for="age") Age 
-        input(type="number" id="age" name="age")
+        input(type="number" name="age")
         
         label(for="gender" class="form-label") Gender 
         select(name="gender" class="form-select")
@@ -23,19 +23,31 @@ html
           option(value="other") Other
 
         label(for="salary") Salary
-        input(type="number" id="salary" name="salary")
-        button.btn.btn-primary(type="submit") Add User
+        input(type="number" name="salary")
+        button.btn.btn-primary(type="submit") Submit 
 
 
     .container.mt-3 
             table.table.table-striped.table-bordered
                 thead
                     tr
-                        th(scope="col") Name
-                        th(scope="col") Age
-                        th(scope="col") Gender
-                        th(scope="col") Salary 
-                        th(scope="col") Action
+                      th(scope="col") Name
+                      th(scope="col") Age
+                      th(scope="col") Gender
+                      th(scope="col") Salary 
+                      th(scope="col") Action
+                tbody
+                    each user in userData 
+                      tr 
+                       td= user.name 
+                       td= user.age 
+                       td= user.gender 
+                       td= user.salary
+                       td 
+                        a(href="" class="btn btn-sm btn-primary") Edit
+
+                        a(href="" class="btn btn-sm btn-primary") Delete 
+
                 
          
 
