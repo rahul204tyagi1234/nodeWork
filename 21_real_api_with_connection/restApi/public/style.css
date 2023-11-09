@@ -1,0 +1,31 @@
+h1{
+    text-align: center;
+    /* color: rgb(6, 238, 238); */
+}
+.card{
+    margin: 25px;
+    width: 30rem;
+    text-align: center;
+    margin-left: 700px;
+    /* border-radius: 12px; */
+    
+    
+}
+.card-header{
+    text-align: center;
+    background-color: rgb(212, 242, 242);
+    font-size: 25px;
+    font-weight: bold;
+
+}
+input{
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+    
+}
+/* section{
+    padding: 5px;
+    margin: 10px;
+    border-radius: 5px;
+} */
