@@ -46,10 +46,10 @@ html
                        td= user.gender 
                        td= user.salary
                        td 
-                        a(href="updateData/:id" class="btn btn-sm btn-primary") Edit
-                        i(href="" class="material-icons") delete
+                        a(href=`/updateData/${user._id}` class="btn btn-sm btn-primary") Edit
+                        //- i(href="deleteData/:id" class="material-icons") delete
 
-                        //- a(href="/deleteData/:id" class="btn btn-sm btn-primary") Delete 
+                        a.btn.btn-sm.btn-primary(href=`/deleteData/${user._id}` ) Delete 
                         //- i.material-icons delete 
                         //- i(href="" class="material-icons") delete
                         //- <i class="material-icons">delete</i>

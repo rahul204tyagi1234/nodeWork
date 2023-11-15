@@ -59,7 +59,7 @@ app.post("/addData", async function (req, res) {
     
     const result = await collection.insertOne(data);
     console.log("your data is inserted done !", result);
-    
+    res.redirect('/')
     
     // res.json({ result: result });
   } catch (err) {
@@ -69,7 +69,8 @@ app.post("/addData", async function (req, res) {
 
 // Delete method
 
-app.delete("/deleteData/:id", async function (req, res) {
+app.get("/deleteData/:id", async function (req, res) {
+  console.log('====')
   const database = client.db("user-api");
   const collection = database.collection("userData");
   const idToDelete = req.params.id;
@@ -79,7 +80,7 @@ app.delete("/deleteData/:id", async function (req, res) {
     const result = await collection.deleteOne(filterValue);
     if (result.deletedCount === 1) {
       console.log("your data is deleted id", idToDelete);
-      res.send(`your data is deleted id ${idToDelete}`);
+      res.redirect('/')
     } else {
       console.log("No data");
       res.send("No data");
@@ -92,7 +93,7 @@ app.delete("/deleteData/:id", async function (req, res) {
 
 // Update method
 
-app.put("/updateData/:id", async function (req, res) {
+app.get("/updateData/:id", async function (req, res) {
   const database = client.db("user-api");
   const collection = database.collection("userData");
   const idToUpdate = req.params.id;
