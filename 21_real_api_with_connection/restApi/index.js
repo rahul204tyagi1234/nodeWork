@@ -14,7 +14,7 @@ connectToDb();
 // app.use(bodyParser.json())
 const express = require("express");
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -32,8 +32,8 @@ app.get("/", async function (req, res) {
     const database = client.db("user-api");
     const collection = database.collection("userData");
     const data = await collection.find({}).toArray();
-    res.render("app",{
-      userData:data
+    res.render("app", {
+      userData: data,
     });
     console.log("your data is created");
   } catch (err) {
@@ -55,12 +55,12 @@ app.post("/addData", async function (req, res) {
       salary: parseInt(req.body.salary),
     };
     // console.log("your age",age)name
-    console.log("your data",data)
-    
+    console.log("your data", data);
+
     const result = await collection.insertOne(data);
     console.log("your data is inserted done !", result);
-    res.redirect('/')
-    
+    res.redirect("/");
+
     // res.json({ result: result });
   } catch (err) {
     console.error("your data is not inserting", err);
@@ -70,7 +70,7 @@ app.post("/addData", async function (req, res) {
 // Delete method
 
 app.get("/deleteData/:id", async function (req, res) {
-  console.log('====')
+  console.log("====");
   const database = client.db("user-api");
   const collection = database.collection("userData");
   const idToDelete = req.params.id;
@@ -80,7 +80,7 @@ app.get("/deleteData/:id", async function (req, res) {
     const result = await collection.deleteOne(filterValue);
     if (result.deletedCount === 1) {
       console.log("your data is deleted id", idToDelete);
-      res.redirect('/')
+      res.redirect("/");
     } else {
       console.log("No data");
       res.send("No data");
@@ -100,12 +100,17 @@ app.get("/updateData/:id", async function (req, res) {
   try {
     const filterValue = { _id: new ObjectId(idToUpdate) };
     const updateResult = {
-      $set: { name: "Suraj chuhan", age: 18, gender: "male", salary: 12000 },
+      $set: {
+        name: req.body.name,
+        age: parseInt(req.body.age),
+        gender: req.body.gender,
+        salary: parseInt(req.body.salary),
+      },
     };
     const result = await collection.updateOne(filterValue, updateResult);
     if (result.modifiedCount === 1) {
       console.log("Your data is modified", idToUpdate);
-      res.render("update")
+      res.render("update");
     } else {
       console.log("Your data is not found", idToUpdate);
       res.send(`Your data is not found ${idToUpdate}`);

@@ -26,44 +26,33 @@ html
 
         label(for="salary") Salary
         input(type="number" name="salary")
-        button.btn.btn-primary(type="submit") Submit 
+        button.btn.btn-success(type="submit") Submit 
 
 
     .container.mt-3 
             table.table.table-striped.table-bordered
                 thead
                     tr
+                      th(scope="col") User Id
                       th(scope="col") Name
                       th(scope="col") Age
                       th(scope="col") Gender
                       th(scope="col") Salary 
-                      th(scope="col") Action
+                      th(scope="col") Edit Action
+                      th(scope="col") Delete Action
                 tbody
                     each user in userData 
                       tr 
+                       td= user._id 
                        td= user.name 
                        td= user.age 
                        td= user.gender 
                        td= user.salary
                        td 
-                        a(href=`/updateData/${user._id}` class="btn btn-sm btn-primary") Edit
+                        a(href=`/updateData/${user._id}` class="btn btn-sm btn-success") Edit
                         //- i(href="deleteData/:id" class="material-icons") delete
-
-                        a.btn.btn-sm.btn-primary(href=`/deleteData/${user._id}` ) Delete 
+                       td 
+                        a.btn.btn-sm.btn-danger(href=`/deleteData/${user._id}` ) Delete 
                         //- i.material-icons delete 
                         //- i(href="" class="material-icons") delete
                         //- <i class="material-icons">delete</i>
-
-                
-         
-
-        
-
-//-  <label> First Name</label>
-//-       <input id="fnamefield" size="20" type="text"><br>
-//-       <label> Last Name</label>
-//-       <input id="lnamefield" size="20" type="text"><br>
-//-       <label> Age</label>
-//-       <input id="agefield" size="20" type="text"><br>
-//-       <label> Gender</label>
-//-       <input id="genderfield" size="20" type="text"><br>
