@@ -69,7 +69,7 @@ app.post("/addData", async function (req, res) {
 
 // Delete method
 
-app.get("/deleteData/:id", async function (req, res) {
+app.delete("/deleteData/:id", async function (req, res) {
   console.log("====");
   const database = client.db("user-api");
   const collection = database.collection("userData");
@@ -92,33 +92,48 @@ app.get("/deleteData/:id", async function (req, res) {
 });
 
 // Update method
-
+app.put("/updateUser/:id", function (req, res) {
+  console.log("put request called!");
+});
 app.get("/updateData/:id", async function (req, res) {
-  const database = client.db("user-api");
+  const idToGet=req.params.id
+  // const idGet=  {_id:new ObjectId(idToGet)};
+  // console.log("hbnjmk,.",idToGet)
+
+    const database = client.db("user-api");
   const collection = database.collection("userData");
-  const idToUpdate = req.params.id;
-  try {
-    const filterValue = { _id: new ObjectId(idToUpdate) };
-    const updateResult = {
-      $set: {
-        name: req.body.name,
-        age: parseInt(req.body.age),
-        gender: req.body.gender,
-        salary: parseInt(req.body.salary),
-      },
-    };
-    const result = await collection.updateOne(filterValue, updateResult);
-    if (result.modifiedCount === 1) {
-      console.log("Your data is modified", idToUpdate);
-      res.render("update");
-    } else {
-      console.log("Your data is not found", idToUpdate);
-      res.send(`Your data is not found ${idToUpdate}`);
-    }
-  } catch (err) {
-    console.error("Your data is not updating", err);
-    res.send("Your data is not updating");
-  }
+  // const data = collection.find({_id: new ObjectId(idToGet)})
+  // if (data) {
+  //   res.json(data);
+  // } else {
+  //   res.send("============");
+  // }
+  res.render("update");
+  // const database = client.db("user-api");
+  // const collection = database.collection("userData");
+  // const idToUpdate = req.params.id;
+  // try {
+  //   const filterValue = { _id: new ObjectId(idToUpdate) };
+  //   const updateResult = {
+  //     $set: {
+  //       name: req.body.name,
+  //       age: parseInt(req.body.age),
+  //       gender: req.body.gender,
+  //       salary: parseInt(req.body.salary),
+  //     },
+  //   };
+  //   const result = await collection.updateOne(filterValue, updateResult);
+  //   if (result.modifiedCount === 1) {
+  //     console.log("Your data is modified", idToUpdate);
+  //     res.render("/");
+  //   } else {
+  //     console.log("Your data is not found", idToUpdate);
+  //     res.send(`Your data is not found ${idToUpdate}`);
+  //   }
+  // } catch (err) {
+  //   console.error("Your data is not updating", err);
+  //   res.send("Your data is not updating");
+  // }
 });
 
 // Get by id mrthod

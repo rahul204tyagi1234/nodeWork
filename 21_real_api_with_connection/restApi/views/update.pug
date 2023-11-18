@@ -5,11 +5,11 @@ html
   body 
 
     h1 Welcome to home page
-    form(action="/updateData/:id" method="PUT") 
+    form(action=`/updateUser/:${user._id}` method="PUT") 
       .card 
         .card-header Login
         label(for="name") Name 
-        input(type="text" id="name" value="${user.name}" name="name")
+        input(type="text" id="name" value=`${user.name}` name="name")
 
         label(for="age") Age 
         input(type="number" id="age" name="age")
@@ -23,5 +23,5 @@ html
 
         label(for="salary") Salary
         input(type="number" id="salary" name="salary")
-        
+
         button.btn.btn-primary(type="submit") Add User
