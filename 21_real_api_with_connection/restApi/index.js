@@ -80,7 +80,7 @@ app.delete("/deleteData/:id", async function (req, res) {
     const result = await collection.deleteOne(filterValue);
     if (result.deletedCount === 1) {
       console.log("your data is deleted id", idToDelete);
-      res.redirect("/");
+      res.json({success:true,massage:'item deleted successfully'});
     } else {
       console.log("No data");
       res.send("No data");
@@ -92,8 +92,10 @@ app.delete("/deleteData/:id", async function (req, res) {
 });
 
 // Update method
-app.put("/updateUser/:id", function (req, res) {
+app.get("/updateUser/:id", function (req, res) {
   console.log("put request called!");
+  res.render("/")
+
 });
 app.get("/updateData/:id", async function (req, res) {
   const idToGet=req.params.id

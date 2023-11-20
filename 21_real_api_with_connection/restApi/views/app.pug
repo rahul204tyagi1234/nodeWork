@@ -3,8 +3,10 @@ html
   head 
     link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous")
     //- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
     link(rel="stylesheet" , href='/style.css')
+    //- script(src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous")
+
   body 
 
     h1 Welcome to home page
@@ -16,7 +18,7 @@ html
 
         label(for="age") Age 
         input(type="number" name="age")
-        
+
         label(for="gender" class="form-label") Gender 
         select(name="gender" class="form-select")
           option(value="") Select
@@ -30,31 +32,44 @@ html
 
 
     .container.mt-3 
-            table.table.table-striped.table-bordered
-                thead
-                    tr
-                      th(scope="col") User Id
-                      th(scope="col") Name
-                      th(scope="col") Age
-                      th(scope="col") Gender
-                      th(scope="col") Salary 
-                      th(scope="col") Edit Action
-                      th(scope="col") Delete Action
-                tbody
-                    each user in userData 
-                      tr 
-                       td= user._id 
-                       td= user.name 
-                       td= user.age 
-                       td= user.gender 
-                       td= user.salary
-                       td 
-                        a(href=`/updateData/${user._id}` class="btn btn-sm btn-success") Edit
-                        //- i(href="deleteData/:id" class="material-icons") delete
-                       td 
-                        a.btn.btn-sm.btn-danger(href=`/deleteData/${user._id}` ) Delete 
-                        //- i.material-icons delete 
-                        //- i(href="" class="material-icons") delete
-                       //- <i class="material-icons">delete</i>
+      table.table.table-striped.table-bordered
+        thead
+          tr
+            //- th(scope="col") User Id
+            th(scope="col") Name
+            th(scope="col") Age
+            th(scope="col") Gender
+            th(scope="col") Salary 
+            th(scope="col") Edit Action
+            th(scope="col") Delete Action
+        tbody
+          each user in userData 
+            tr 
+              //- td= user._id 
+              td= user.name 
+              td= user.age 
+              td= user.gender 
+              td= user.salary
+              td 
+                a(href=`/updateData/${user._id}` class="btn btn-sm btn-success" id="delete") Edit
+                //- i(href="deleteData/:id" class="material-icons") delete
+              td 
+                button.btn.btn-sm.btn-danger(type='button',onclick=`deleteItem(${user._id})`) Delete 
+                //- i.material-icons delete 
+                //- i(href="" class="material-icons") delete
+                //- <i class="material-icons">delete</i>
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script.
-     
+      function deleteItem(user._id){
+        $.ajax({
+          url:`/deleteData/${user._id}`,
+          type:'DELETE',
+          success:function(result){
+            console.log(result.message);
+            location.reload();
+          },
+          error: function(error){
+            console.error('Error deleting item:'.error)
+          }
+        })
+      }
