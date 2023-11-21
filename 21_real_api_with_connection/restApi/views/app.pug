@@ -51,18 +51,23 @@ html
               td= user.gender 
               td= user.salary
               td 
-                a(href=`/updateData/${user._id}` class="btn btn-sm btn-success" id="delete") Edit
+                a(href=`/updateData/${user._id}` class="btn btn-sm btn-success") Edit
                 //- i(href="deleteData/:id" class="material-icons") delete
               td 
-                button.btn.btn-sm.btn-danger(type='button',onclick=`deleteItem(${user._id})`) Delete 
+                button.btn.btn-sm.btn-danger.stb(type='button', id=`${user._id}`) Delete 
                 //- i.material-icons delete 
                 //- i(href="" class="material-icons") delete
                 //- <i class="material-icons">delete</i>
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script.
-      function deleteItem(user._id){
+      $('.stb').on('click',function(event){
+        console.log('data', event.target.id)
+        deleteItem(event.target.id);
+      })
+      function deleteItem(userid){
+            console.log("-----------",userid)
         $.ajax({
-          url:`/deleteData/${user._id}`,
+          url:'/deleteData/'+userid,
           type:'DELETE',
           success:function(result){
             console.log(result.message);
