@@ -1,0 +1,64 @@
+html 
+  head 
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous")
+    link(rel="stylesheet" , href='/style.css')
+  body 
+
+    h1 Welcome to home page
+    form#updateForm(action=`/updateData/${userData._id}` method="PUT") 
+      .card 
+        .card-header Login
+        label(for="name") Name 
+        input(type="text" id="name" value=`${userData.name}` name="name")
+
+        label(for="age") Age 
+        input(type="number" id="age" value=`${userData.age}` name="age")
+
+        label(for="gender" class="form-label") Gender 
+        select(name="gender" class="form-select")
+          option(value="") Select  
+          option(value=`${userData.male}`) Male
+          option(value=`${userData.female}`) Female
+          option(value=`${userData.other}`) Other
+
+        label(for="salary") Salary
+        input(type="number" id="salary" value=`${userData.salary}` name="salary")
+
+        button.btn.btn-success(type="submit") Add User
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    script.
+         $(document).ready(function(){
+           $('#updateForm').submit(function(event){
+             event.preventDefault();
+            $.ajax({
+              type:'PUT',
+              url:'',
+              data:{name:$('#name').val()},
+              success:function(response){
+                console.log('Updated data:',response);
+              },
+              erro:function(error){
+                console.error('error updating time:',error)
+              }
+            })
+           })
+         })
+      //- $('.stb').on('click',function(event){
+      //- console.log('data', event.target.id)
+      //- updateItem(event.target.id);
+      //- })
+      //- function updateItem(userid){
+      //-    console.log("-----------",userid)
+      //-    $.ajax({
+      //-    url:'/updateData/'+userid,
+      //-    type:'PUT'
+      //-    data:{name:$('#name').val()},
+      //-    success:function(result){
+      //-    console.log(result.message);
+      //-    location.reload("/");
+      //-   },
+      //-    error: function(error){
+      //-    console.error('Error deleting item:'.error)
+      //-    }
+      //-   })
+      //- }
