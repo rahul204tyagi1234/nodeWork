@@ -80,7 +80,7 @@ app.delete("/deleteData/:id", async function (req, res) {
     const result = await collection.deleteOne(filterValue);
     if (result.deletedCount === 1) {
       console.log("your data is deleted id", idToDelete);
-      res.json({success:true,massage:'item deleted successfully'});
+      res.json({ success: true, massage: "item deleted successfully" });
     } else {
       console.log("No data");
       res.send("No data");
@@ -97,23 +97,23 @@ app.delete("/deleteData/:id", async function (req, res) {
 //   res.render("update")
 
 // });
-app.get("/updateData/:id", async function (req, res) {
-  // const idToGet=req.params.id
-  // // const idGet=  {_id:new ObjectId(idToGet)};
-  // console.log("hbnjmk,.",idToGet)
-
-  //   const database = client.db("user-api");
-  // const collection = database.collection("userData");
-  // const data = collection.find({_id: new ObjectId(idToGet)})
-  // if (data) {
-  //   res.json(data);
-  // } else {
-  //   res.send("============");
-  // }
-  // res.render("update");
+app.get("/updateForm/:id", async function (req, res) {
+  const idToGet = req.params.id;
+  const filter = new ObjectId(idToGet);
   const database = client.db("user-api");
   const collection = database.collection("userData");
+  const data = await collection.findOne(filter);
+  console.log("==data in pug ==", data);
+  console.log("======", idToGet);
+  res.render("update", { userData: data });
+});
+
+app.put("/updateData/:id", async function (req, res) {
   const idToUpdate = req.params.id;
+  console.log("==========id==", idToUpdate);
+  console.log("========////=======");
+  const database = client.db("user-api");
+  const collection = database.collection("userData");
   try {
     const filterValue = { _id: new ObjectId(idToUpdate) };
     const updateResult = {
@@ -127,7 +127,7 @@ app.get("/updateData/:id", async function (req, res) {
     const result = await collection.updateOne(filterValue, updateResult);
     if (result.modifiedCount === 1) {
       console.log("Your data is modified", idToUpdate);
-      res.json({status:200})
+      res.json({updateResult});
     } else {
       console.log("Your data is not found", idToUpdate);
       res.send(`Your data is not found ${idToUpdate}`);
