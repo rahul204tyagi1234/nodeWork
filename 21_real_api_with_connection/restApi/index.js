@@ -127,7 +127,7 @@ app.put("/updateData/:id", async function (req, res) {
     const result = await collection.updateOne(filterValue, updateResult);
     if (result.modifiedCount === 1) {
       console.log("Your data is modified", idToUpdate);
-      res.json({updateResult});
+      res.json({status:200});
     } else {
       console.log("Your data is not found", idToUpdate);
       res.send(`Your data is not found ${idToUpdate}`);

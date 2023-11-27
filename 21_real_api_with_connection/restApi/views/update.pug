@@ -5,7 +5,7 @@ html
   body 
 
     h1 Welcome to home page
-    form#updateForm(action=`/updateData/${userData._id}` method="PUT") 
+    form(action=`/updateData/${userData._id}` method="PUT") 
       .card 
         .card-header Login
         label(for="name") Name 
@@ -14,51 +14,52 @@ html
         label(for="age") Age 
         input(type="number" id="age" value=`${userData.age}` name="age")
 
-        label(for="gender" class="form-label") Gender 
-        select(name="gender" class="form-select")
+        label(for="gender" class="form-label" ) Gender 
+        select(name="gender" class="form-select" id="gender")
           option(value="") Select  
-          option(value=`${userData.male}`) Male
-          option(value=`${userData.female}`) Female
-          option(value=`${userData.other}`) Other
+          option(value="male") Male
+          option(value="female") Female
+          option(value="other") Other
 
         label(for="salary") Salary
         input(type="number" id="salary" value=`${userData.salary}` name="salary")
 
-        button.btn.btn-success(type="submit") Add User
+        button.btn.btn-success.stb(type="submit" id=`${userData._id}`) Update User
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     script.
-         $(document).ready(function(){
-           $('#updateForm').submit(function(event){
-             event.preventDefault();
-            $.ajax({
-              type:'PUT',
-              url:'',
-              data:{name:$('#name').val()},
-              success:function(response){
-                console.log('Updated data:',response);
-              },
-              erro:function(error){
-                console.error('error updating time:',error)
-              }
-            })
-           })
-         })
-      //- $('.stb').on('click',function(event){
-      //- console.log('data', event.target.id)
-      //- updateItem(event.target.id);
-      //- })
-      //- function updateItem(userid){
-      //-    console.log("-----------",userid)
-      //-    $.ajax({
-      //-    url:'/updateData/'+userid,
-      //-    type:'PUT'
-      //-    data:{name:$('#name').val()},
-      //-    success:function(result){
-      //-    console.log(result.message);
-      //-    location.reload("/");
-      //-   },
-      //-    error: function(error){
-      //-    console.error('Error deleting item:'.error)
-      //-    }
-      //-   })
-      //- }
+        //-  $(document).ready(function(){
+        //-    $('#updateForm').submit(function(event){
+        //-      event.preventDefault();
+        //-     $.ajax({
+        //-       type:'PUT',
+        //-       url:'',
+        //-       data:{name:$('#name').val()},
+        //-       success:function(response){
+        //-         console.log('Updated data:',response);
+        //-       },
+        //-       erro:function(error){
+        //-         console.error('error updating time:',error)
+        //-       }
+        //-     })
+        //-    })
+        //-  })
+      $('.stb').on('click',function(event){
+      console.log('data', event.target.id)
+      updateItem(event.target.id);
+      })
+      function updateItem(userid){
+         console.log("-----------",userid)
+        $.ajax({
+         url:'/updateData/'+userid,
+         type:'PUT',
+         data:{name:$('#name').val(),age:$('#age').val(),gender:$('#gender').val(),salary:$('#salary').val()},
+         success:function(result){
+         console.log(result.message);
+        //-  alert('Your form has been sent successfully.');
+         window.location.href = "/";
+         },
+         error: function(error){
+         console.error('Error deleting item:'.error)
+         }
+        })
+      }
